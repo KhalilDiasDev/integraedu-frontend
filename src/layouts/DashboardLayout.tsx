@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Outlet, useNavigate, useLocation } from "react-router-dom"
 import { Layout, Menu, Button, Dropdown, Avatar } from "antd"
-import { LayoutDashboard, School, Users, BarChart3, LogOut, User, MenuIcon } from "lucide-react"
+import { LayoutDashboard, School, Users, BarChart3, LogOut, User, MenuIcon, PanelLeft } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
 
 const { Header, Sider, Content } = Layout
@@ -102,7 +102,7 @@ export default function DashboardLayout() {
         >
           <Button
             type="text"
-            icon={<MenuIcon size={20} />}
+            icon={<PanelLeft  size={20} />}
             onClick={() => setCollapsed(!collapsed)}
             style={{ color: "hsl(var(--foreground))" }}
           />

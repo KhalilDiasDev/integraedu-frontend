@@ -3,10 +3,14 @@ import { api } from "./axios"
 export interface FormacaoProfessor {
   formacao: string
   quantidade: number
+  com_doutorado:number
+  com_mestrado :number
+  com_pos_graduacao :number
 }
 
 export interface ProfessoresPorEscola {
-  escola_nome: string
+  escola: string
+  distribuicao: string
   codigo_inep: string
   total_professores: number
 }
@@ -17,6 +21,7 @@ export interface AnaliseEscola {
   total_professores: number
   media_idade: number
   percentual_feminino: number
+
 }
 
 export const metricasApi = {

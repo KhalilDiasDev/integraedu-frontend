@@ -2,7 +2,7 @@ import { api } from "./axios"
 
 export interface Escola {
   id: number
-  codigo_inep: string
+  codigoINEP: string
   nome: string
   municipio: string
   uf: string

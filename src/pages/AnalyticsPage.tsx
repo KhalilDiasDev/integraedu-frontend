@@ -22,18 +22,13 @@ import { escolasApi } from "@/api/escolas"
 const COLORS = ["#3b82f6", "#8b5cf6", "#ec4899", "#f59e0b", "#10b981", "#06b6d4"]
 
 export default function AnalyticsPage() {
-  const [selectedEscola, setSelectedEscola] = useState<string>()
+ /*  const [selectedEscola, setSelectedEscola] = useState<string>()
 
-  const { data: formacao, isLoading: loadingForm } = useQuery({
-    queryKey: ["formacao"],
-    queryFn: metricasApi.formacaoProfessores,
-  })
-
-/*   const { data: profPorEscola, isLoading: loadingProfEsc } = useQuery({
+  const { data: profPorEscola, isLoading: loadingProfEsc } = useQuery({
     queryKey: ["professores-escola"],
     queryFn: metricasApi.professoresPorEscola,
   })
- */
+
   const { data: escolas, isLoading: loadingEscolas } = useQuery({
     queryKey: ["escolas"],
     queryFn: () => escolasApi.list(),
@@ -43,10 +38,9 @@ export default function AnalyticsPage() {
     queryKey: ["analise-escola", selectedEscola],
     queryFn: () => metricasApi.analiseEscola(selectedEscola!),
     enabled: !!selectedEscola,
-  })
+  }) */
 
-/*   const topEscolas = profPorEscola?.slice(0, 15) || []
- */
+
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
@@ -55,37 +49,8 @@ export default function AnalyticsPage() {
       </div>
 
       <Row gutter={[16, 16]}>
-        <Col xs={24} lg={12}>
-          <Card title="Distribuição de Formação dos Professores" style={{ height: 450 }}>
-            {loadingForm ? (
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: 350 }}>
-                <Spin />
-              </div>
-            ) : (
-              <ResponsiveContainer width="100%" height={350}>
-                <PieChart>
-                  <Pie
-                    data={formacao}
-                    dataKey="quantidade"
-                    nameKey="formacao"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={100}
-                    label={(entry) => `${entry.formacao}: ${entry.quantidade}`}
-                  >
-                    {formacao?.map((_, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            )}
-          </Card>
-        </Col>
-
-     {/*    <Col xs={24} lg={12}>
+       
+        {/* <Col xs={24} lg={12}>
           <Card title="Top 15 Escolas por Número de Professores" style={{ height: 450 }}>
             {loadingProfEsc ? (
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: 350 }}>
@@ -93,7 +58,7 @@ export default function AnalyticsPage() {
               </div>
             ) : (
               <ResponsiveContainer width="100%" height={350}>
-                <BarChart data={topEscolas} layout="vertical">
+                <BarChart data={profPorEscola} layout="vertical">
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis type="number" />
                   <YAxis dataKey="escola_nome" type="category" width={150} />
@@ -103,7 +68,7 @@ export default function AnalyticsPage() {
               </ResponsiveContainer>
             )}
           </Card>
-        </Col> */}
+        </Col>
 
         <Col xs={24}>
           <Card title="Análise Detalhada por Escola">
@@ -114,8 +79,8 @@ export default function AnalyticsPage() {
               showSearch
               loading={loadingEscolas}
               options={escolas?.map((e) => ({
-                label: `${e.nome} (${e.codigo_inep})`,
-                value: e.codigo_inep,
+                label: `${e.nome} (${e.codigoINEP})`,
+                value: e.codigoINEP,
               }))}
               onChange={setSelectedEscola}
               filterOption={(input, option) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())}
@@ -162,7 +127,7 @@ export default function AnalyticsPage() {
               </Row>
             )}
           </Card>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   )
