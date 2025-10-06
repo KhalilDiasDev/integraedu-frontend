@@ -71,6 +71,7 @@ export default function DashboardLayout() {
             height: 64,
             display: "flex",
             alignItems: "center",
+            textAlign: "center",
             justifyContent: "center",
             borderBottom: "1px solid hsl(var(--border))",
             fontSize: collapsed ? 16 : 20,
@@ -78,7 +79,7 @@ export default function DashboardLayout() {
             color: "hsl(var(--primary))",
           }}
         >
-          {collapsed ? "IE" : "IntegraEDU"}
+          {collapsed ?  <div ><img src="./public/img/logo-integraedu.png" style={{width:'30px'}}/></div>: <div><img src="./public/img/logo-integraedu.png" style={{marginRight:'15px', width:'30px'}}/>IntegraEDU</div>}
         </div>
         <Menu
           theme="light"

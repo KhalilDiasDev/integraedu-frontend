@@ -6,6 +6,7 @@ import { createContext, useContext, useState, useEffect } from "react"
 interface AuthContextType {
   token: string | null
   username: string | null
+  isLoading: boolean 
   login: (token: string, username: string) => void
   logout: () => void
 }
@@ -15,14 +16,18 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null)
   const [username, setUsername] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const storedToken = localStorage.getItem("access_token")
     const storedUsername = localStorage.getItem("username")
-    if (storedToken) {
+
+    if (storedToken && storedUsername) {
       setToken(storedToken)
       setUsername(storedUsername)
     }
+
+    setIsLoading(false)
   }, [])
 
   const login = (newToken: string, newUsername: string) => {
@@ -39,7 +44,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUsername(null)
   }
 
-  return <AuthContext.Provider value={{ token, username, login, logout }}>{children}</AuthContext.Provider>
+  const value = { token, username, isLoading, login, logout }
+
+  return <AuthContext.Provider value={value}>{!isLoading && children}</AuthContext.Provider>
 }
 
 export function useAuth() {
